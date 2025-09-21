@@ -74,15 +74,39 @@ export function ApplicationForm() {
   });
 
   const processForm: SubmitHandler<ApplicationFormData> = async (data) => {
-    console.log("Form data:", data);
-    // Simulate a successful submission
-    setIsSubmitted(true);
-    toast({
-      title: "Application Submitted!",
-      description: "Thank you for applying. We will review your application shortly.",
-      variant: "default",
-    });
-    form.reset();
+    try {
+      const response = await fetch('/api/submit-application', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        setIsSubmitted(true);
+        toast({
+          title: "Application Submitted!",
+          description: "Thank you for applying. We will review your application shortly.",
+          variant: "default",
+        });
+        form.reset();
+      } else {
+        const errorData = await response.json();
+        toast({
+          title: "Submission Failed",
+          description: errorData.error || "There was an error submitting your application. Please try again.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      toast({
+        title: "Submission Failed",
+        description: "There was an error submitting your application. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
   
   if (isSubmitted) {
