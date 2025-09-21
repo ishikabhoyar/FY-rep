@@ -18,6 +18,11 @@ export async function POST(request: NextRequest) {
 
     // Log the application data (fallback while setting up Google Sheets)
     console.log('=== NEW APPLICATION SUBMITTED ===');
+    console.log('Environment check:');
+    console.log('- GOOGLE_SERVICE_ACCOUNT_EMAIL exists:', !!process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL);
+    console.log('- GOOGLE_PRIVATE_KEY exists:', !!process.env.GOOGLE_PRIVATE_KEY);
+    console.log('- GOOGLE_SHEETS_ID exists:', !!process.env.GOOGLE_SHEETS_ID);
+    console.log('- GOOGLE_SHEET_NAME exists:', !!process.env.GOOGLE_SHEET_NAME);
     console.log('Timestamp:', new Date().toISOString());
     console.log('Name:', body.name);
     console.log('Phone:', body.phone);
@@ -32,10 +37,17 @@ export async function POST(request: NextRequest) {
 
     // Try to add to Google Sheets
     let sheetsSuccess = false;
+    let sheetsError = null;
     try {
       sheetsSuccess = await googleSheetsService.addApplication(body);
-    } catch (sheetsError) {
-      console.error('Google Sheets error (will continue with console logging):', sheetsError);
+      console.log('Google Sheets operation result:', sheetsSuccess);
+    } catch (error) {
+      sheetsError = error;
+      console.error('Google Sheets error details:', {
+        message: error instanceof Error ? error.message : 'Unknown error',
+        stack: error instanceof Error ? error.stack : undefined,
+        error
+      });
     }
 
     if (sheetsSuccess) {
@@ -48,7 +60,15 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         { 
           message: 'Application received and logged (Google Sheets setup pending)',
-          note: 'Your application has been recorded. Please check the setup guide for Google Sheets integration.'
+          note: 'Your application has been recorded. Please check the setup guide for Google Sheets integration.',
+          debug: {
+            sheetsError: sheetsError instanceof Error ? sheetsError.message : 'Unknown sheets error',
+            envVars: {
+              hasServiceAccount: !!process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+              hasPrivateKey: !!process.env.GOOGLE_PRIVATE_KEY,
+              hasSheetsId: !!process.env.GOOGLE_SHEETS_ID
+            }
+          }
         },
         { status: 200 }
       );
@@ -56,7 +76,10 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Error in submit-application API:', error);
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { 
+        error: 'Internal server error',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      },
       { status: 500 }
     );
   }
