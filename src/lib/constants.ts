@@ -4,7 +4,7 @@ export const YEAR_OPTIONS = [
 
 export const PREFERENCE_OPTIONS = [
   { label: "Tech", value: "Tech" },
-  { label: "Creatives", value: "Creatives" },
+  { label: "Creative", value: "Creative" },
   { label: "PR", value: "PR" },
   { label: "Marketing", value: "Marketing" },
   { label: "Operations", value: "Operations" },

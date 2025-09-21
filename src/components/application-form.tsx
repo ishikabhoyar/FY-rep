@@ -271,7 +271,7 @@ export function ApplicationForm() {
                 ) : (
                   <>
                     Submit Application
-                    <Send className="ml-2 h-4 w-4" />
+                    <Send className="ml h-4 w-4" />
                   </>
                 )}
               </Button>

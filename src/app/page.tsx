@@ -20,7 +20,7 @@ export default function HomePage() {
                 height={100}
               />
             </div>
-            <CardTitle className="text-4xl font-bold tracking-tight">DataZen is Recruiting!</CardTitle>
+            <CardTitle className="text-4xl font-bold tracking-tight">DataZen is Recruiting FY Representative!</CardTitle>
             <CardDescription className="text-lg mt-3 text-muted-foreground px-4">
               Join the official Data Science Council of Somaiya Vidyavihar University and pioneer the future of data innovation.
             </CardDescription>
