@@ -37,6 +37,7 @@ import { Textarea } from "@/components/ui/textarea";
 
 const applicationSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters long."),
+  phone: z.string().min(10, "Phone number must be at least 10 digits.").regex(/^[0-9+\s-()]+$/, "Please enter a valid phone number."),
   college: z.string().min(3, "College name must be at least 3 characters long."),
   year: z.enum(["FY"], { required_error: "Please select your year." }),
   preference1: z.string({ required_error: "Please select preference 1." }),
@@ -63,6 +64,7 @@ export function ApplicationForm() {
     mode: "onChange",
     defaultValues: {
       name: "",
+      phone: "",
       college: "",
       year: undefined,
       preference1: undefined,
@@ -146,6 +148,19 @@ export function ApplicationForm() {
                     <FormLabel>Full Name</FormLabel>
                     <FormControl>
                       <Input placeholder="Enter your full name" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="phone"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Phone Number</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter your phone number" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

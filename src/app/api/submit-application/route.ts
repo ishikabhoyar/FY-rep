@@ -6,7 +6,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     
     // Validate the required fields
-    const requiredFields = ['name', 'college', 'year', 'preference1', 'preference2', 'aboutYourself', 'whyJoin', 'resumeLink'];
+    const requiredFields = ['name', 'phone', 'college', 'year', 'preference1', 'preference2', 'aboutYourself', 'whyJoin', 'resumeLink'];
     const missingFields = requiredFields.filter(field => !body[field]);
     
     if (missingFields.length > 0) {
@@ -20,6 +20,7 @@ export async function POST(request: NextRequest) {
     console.log('=== NEW APPLICATION SUBMITTED ===');
     console.log('Timestamp:', new Date().toISOString());
     console.log('Name:', body.name);
+    console.log('Phone:', body.phone);
     console.log('College:', body.college);
     console.log('Year:', body.year);
     console.log('Preference 1:', body.preference1);

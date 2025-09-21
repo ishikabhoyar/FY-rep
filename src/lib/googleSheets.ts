@@ -9,6 +9,7 @@ const SHEET_NAME = process.env.GOOGLE_SHEET_NAME || 'Applications';
 
 interface ApplicationData {
   name: string;
+  phone: string;
   college: string;
   year: string;
   preference1: string;
@@ -73,6 +74,7 @@ export class GoogleSheetsService {
         [
           new Date().toISOString(), // Timestamp
           data.name,
+          data.phone,
           data.college,
           data.year,
           data.preference1,
@@ -85,7 +87,7 @@ export class GoogleSheetsService {
 
       const request = {
         spreadsheetId: SPREADSHEET_ID,
-        range: `${SHEET_NAME}!A:I`, // Updated range to match actual columns
+        range: `${SHEET_NAME}!A:J`, // Updated range to include phone number column
         valueInputOption: 'RAW',
         resource: {
           values,
@@ -112,6 +114,7 @@ export class GoogleSheetsService {
       const headers = [
         'Timestamp',
         'Name',
+        'Phone',
         'College',
         'Year',
         'Preference 1',
@@ -123,7 +126,7 @@ export class GoogleSheetsService {
 
       const request = {
         spreadsheetId: SPREADSHEET_ID,
-        range: `${SHEET_NAME}!A1:I1`,
+        range: `${SHEET_NAME}!A1:J1`,
         valueInputOption: 'RAW',
         resource: {
           values: [headers],
