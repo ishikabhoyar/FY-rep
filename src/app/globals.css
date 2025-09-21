@@ -1,0 +1,189 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%; /* White */
+    --foreground: 0 0% 0%; /* Black */
+
+    --card: 0 0% 100%; /* White */
+    --card-foreground: 0 0% 0%; /* Black */
+
+    --popover: 0 0% 100%; /* White */
+    --popover-foreground: 0 0% 0%; /* Black */
+
+    --primary: 0 100% 50%; /* Red */
+    --primary-foreground: 0 0% 100%; /* White */
+
+    --secondary: 0 0% 96%; /* Light Gray for page background */
+    --secondary-foreground: 0 0% 9%; /* Dark Gray */
+
+    --muted: 0 0% 96%; /* Light Gray */
+    --muted-foreground: 0 0% 45%; /* Medium Gray */
+
+    --accent: 0 100% 50%; /* Red */
+    --accent-foreground: 0 0% 100%; /* White */
+
+    --destructive: 0 84.2% 60.2%; /* A slightly different red for destructive actions if needed */
+    --destructive-foreground: 0 0% 100%; /* White */
+
+    --border: 0 0% 89.8%; /* Light Gray */
+    --input: 0 0% 89.8%; /* Light Gray */
+    --ring: 0 100% 50%; /* Red */
+
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+
+    /* Sidebar variables - kept from original but not strictly needed for this app */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 0 0% 10%; /* Dark background for dark mode */
+    --foreground: 0 0% 95%; /* Light text for dark mode */
+    
+    --card: 0 0% 12%;
+    --card-foreground: 0 0% 95%;
+    
+    --popover: 0 0% 12%;
+    --popover-foreground: 0 0% 95%;
+    
+    --primary: 0 100% 55%; /* Brighter Red for dark mode primary */
+    --primary-foreground: 0 0% 100%; /* White text for dark mode */
+    
+    --secondary: 0 0% 18%; /* Darker gray for page background in dark mode */
+    --secondary-foreground: 0 0% 90%;
+    
+    --muted: 0 0% 18%;
+    --muted-foreground: 0 0% 60%;
+    
+    --accent: 0 100% 55%; /* Brighter Red - matches primary */
+    --accent-foreground: 0 0% 100%; /* White */
+    
+    --destructive: 0 70% 50%; /* A vibrant red for destructive actions in dark mode */
+    --destructive-foreground: 0 0% 100%; /* White */
+    
+    --border: 0 0% 25%;
+    --input: 0 0% 25%;
+    --ring: 0 100% 55%; /* Brighter Red */
+
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+
+    /* Sidebar variables for dark mode */
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 0 100% 55%; /* Red for sidebar primary in dark mode */
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 0 100% 55%; /* Red for sidebar ring in dark mode */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .animate-fadeInUp {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fadeIn {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  .page-background-shapes {
+    position: relative;
+    overflow: hidden; /* Keep shapes contained */
+  }
+
+  .page-background-shapes::before,
+  .page-background-shapes::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    z-index: 0; /* Behind the main content card */
+  }
+
+  .page-background-shapes::before {
+    width: 400px; 
+    height: 400px;
+    background: hsl(var(--primary) / 0.08); 
+    top: -5%; 
+    left: -15%; 
+    animation: floatShape1 22s infinite alternate ease-in-out;
+  }
+
+  .page-background-shapes::after {
+    width: 320px; 
+    height: 320px;
+    background: hsl(var(--accent) / 0.07);
+    bottom: -8%; 
+    right: -18%; 
+    animation: floatShape2 28s infinite alternate ease-in-out;
+  }
+
+  @keyframes floatShape1 {
+    0% {
+      transform: translateY(0px) translateX(0px) rotate(0deg) scale(1);
+    }
+    50% {
+      transform: translateY(-30px) translateX(25px) rotate(5deg) scale(1.03);
+    }
+    100% {
+      transform: translateY(20px) translateX(-20px) rotate(-3deg) scale(0.97);
+    }
+  }
+
+  @keyframes floatShape2 {
+    0% {
+      transform: translateY(0px) translateX(0px) scale(1) rotate(0deg);
+    }
+    50% {
+      transform: translateY(25px) translateX(-30px) scale(1.08) rotate(7deg);
+    }
+    100% {
+      transform: translateY(-15px) translateX(20px) scale(0.92) rotate(-5deg);
+    }
+  }
+}
+
+    
