@@ -104,6 +104,24 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  /* Mobile optimizations */
+  @media (max-width: 640px) {
+    .page-background-shapes::before {
+      width: 250px; 
+      height: 250px;
+      top: -10%; 
+      left: -25%;
+    }
+    
+    .page-background-shapes::after {
+      width: 200px; 
+      height: 200px;
+      bottom: -15%; 
+      right: -25%;
+    }
   }
 }
 
@@ -141,12 +159,13 @@
     position: absolute;
     border-radius: 50%;
     z-index: 0; /* Behind the main content card */
+    opacity: 0.8;
   }
 
   .page-background-shapes::before {
     width: 400px; 
     height: 400px;
-    background: hsl(var(--primary) / 0.08); 
+    background: hsl(var(--primary) / 0.1); 
     top: -5%; 
     left: -15%; 
     animation: floatShape1 22s infinite alternate ease-in-out;
@@ -155,7 +174,7 @@
   .page-background-shapes::after {
     width: 320px; 
     height: 320px;
-    background: hsl(var(--accent) / 0.07);
+    background: hsl(var(--accent) / 0.08);
     bottom: -8%; 
     right: -18%; 
     animation: floatShape2 28s infinite alternate ease-in-out;
@@ -182,6 +201,32 @@
     }
     100% {
       transform: translateY(-15px) translateX(20px) scale(0.92) rotate(-5deg);
+    }
+  }
+  
+  /* Mobile responsiveness for better UX */
+  @media (max-width: 640px) {
+    .page-background-shapes::before {
+      width: 250px; 
+      height: 250px;
+      top: -10%; 
+      left: -25%;
+      opacity: 0.6;
+    }
+    
+    .page-background-shapes::after {
+      width: 200px; 
+      height: 200px;
+      bottom: -15%; 
+      right: -25%;
+      opacity: 0.6;
+    }
+  }
+  
+  /* Better scroll behavior on mobile */
+  @media (max-width: 768px) {
+    html {
+      scroll-behavior: smooth;
     }
   }
 }

@@ -113,15 +113,15 @@ export function ApplicationForm() {
   
   if (isSubmitted) {
     return (
-      <Card className="w-full max-w-xl shadow-2xl">
-        <CardHeader className="text-center">
-          <CheckCircle2 className="mx-auto h-16 w-16 text-accent" />
-          <CardTitle className="text-3xl font-bold mt-4">Application Submitted!</CardTitle>
-          <CardDescription className="text-lg mt-2">
+      <Card className="w-full max-w-xl mx-auto shadow-2xl border-border/50">
+        <CardHeader className="text-center p-6 sm:p-8">
+          <CheckCircle2 className="mx-auto h-12 w-12 sm:h-16 sm:w-16 text-primary" />
+          <CardTitle className="text-2xl sm:text-3xl font-bold mt-4 text-card-foreground">Application Submitted!</CardTitle>
+          <CardDescription className="text-base sm:text-lg mt-2 text-muted-foreground px-2">
             Thank you for your interest. We have received your application and will be in touch soon.
           </CardDescription>
         </CardHeader>
-        <CardFooter>
+        <CardFooter className="p-4 sm:p-6">
             <Button onClick={() => setIsSubmitted(false)} className="w-full" variant="outline">
                 Submit Another Application
             </Button>
@@ -131,15 +131,15 @@ export function ApplicationForm() {
   }
 
   return (
-    <Card className="w-full max-w-xl shadow-2xl">
-      <CardHeader>
-        <CardTitle className="text-2xl font-semibold">DataZen Admissions 2025-26</CardTitle>
-        <CardDescription>Please fill out the form carefully. All fields are required.</CardDescription>
+    <Card className="w-full max-w-xl mx-auto shadow-2xl border-border/50">
+      <CardHeader className="p-4 sm:p-6">
+        <CardTitle className="text-xl sm:text-2xl font-semibold text-card-foreground">DataZen Admissions 2025-26</CardTitle>
+        <CardDescription className="text-sm sm:text-base text-muted-foreground">Please fill out the form carefully. All fields are required.</CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="p-4 sm:p-6">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(processForm)} className="space-y-6">
-            <div className="space-y-4 animate-fadeIn">
+          <form onSubmit={form.handleSubmit(processForm)} className="space-y-4 sm:space-y-6">
+            <div className="space-y-3 sm:space-y-4 animate-fadeIn">
               <FormField
                 control={form.control}
                 name="name"
@@ -300,7 +300,7 @@ export function ApplicationForm() {
               />
             </div>
 
-            <CardFooter className="flex justify-end p-0 pt-6">
+            <CardFooter className="flex justify-end p-0 pt-4 sm:pt-6">
               <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
                 {form.formState.isSubmitting ? (
                   <>
@@ -310,7 +310,7 @@ export function ApplicationForm() {
                 ) : (
                   <>
                     Submit Application
-                    <Send className="ml h-4 w-4" />
+                    <Send className="ml-2 h-4 w-4" />
                   </>
                 )}
               </Button>
