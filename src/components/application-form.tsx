@@ -131,23 +131,28 @@ export function ApplicationForm() {
   }
 
   return (
-    <Card className="w-full max-w-xl mx-auto shadow-2xl border-border/50">
-      <CardHeader className="p-4 sm:p-6">
-        <CardTitle className="text-xl sm:text-2xl font-semibold text-card-foreground">DataZen Admissions 2025-26</CardTitle>
-        <CardDescription className="text-sm sm:text-base text-muted-foreground">Please fill out the form carefully. All fields are required.</CardDescription>
-      </CardHeader>
-      <CardContent className="p-4 sm:p-6">
+    <div className="w-full max-w-lg mx-auto lg:mx-0">
+      <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl">
+        <div className="mb-8">
+          <h2 className="text-2xl font-bold text-white mb-2">Apply Now</h2>
+          <p className="text-white/60 text-sm">All fields are required</p>
+        </div>
+        
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(processForm)} className="space-y-4 sm:space-y-6">
-            <div className="space-y-3 sm:space-y-4 animate-fadeIn">
+          <form onSubmit={form.handleSubmit(processForm)} className="space-y-6">
+            <div className="grid grid-cols-2 gap-4">
               <FormField
                 control={form.control}
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Full Name</FormLabel>
+                    <FormLabel className="text-white/80 text-sm">Name</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter your full name" {...field} />
+                      <Input 
+                        placeholder="Full name" 
+                        className="bg-white/5 border-white/10 text-white placeholder:text-white/40 focus:border-white/30 focus:bg-white/10"
+                        {...field} 
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -158,22 +163,33 @@ export function ApplicationForm() {
                 name="phone"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Phone Number</FormLabel>
+                    <FormLabel className="text-white/80 text-sm">Phone</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter your phone number" {...field} />
+                      <Input 
+                        placeholder="Phone number" 
+                        className="bg-white/5 border-white/10 text-white placeholder:text-white/40 focus:border-white/30 focus:bg-white/10"
+                        {...field} 
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
+            </div>
+            
+            <div className="grid grid-cols-2 gap-4">
               <FormField
                 control={form.control}
                 name="college"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>College Name</FormLabel>
+                    <FormLabel className="text-white/80 text-sm">College</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter your college name" {...field} />
+                      <Input 
+                        placeholder="College name" 
+                        className="bg-white/5 border-white/10 text-white placeholder:text-white/40 focus:border-white/30 focus:bg-white/10"
+                        {...field} 
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -184,16 +200,16 @@ export function ApplicationForm() {
                 name="year"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Current Year</FormLabel>
+                    <FormLabel className="text-white/80 text-sm">Year</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select your current year" />
+                        <SelectTrigger className="bg-white/5 border-white/10 text-white focus:border-white/30">
+                          <SelectValue placeholder="Select year" />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent>
+                      <SelectContent className="bg-black/90 border-white/10">
                         {YEAR_OPTIONS.map((option) => (
-                          <SelectItem key={option.value} value={option.value}>
+                          <SelectItem key={option.value} value={option.value} className="text-white hover:bg-white/10">
                             {option.label}
                           </SelectItem>
                         ))}
@@ -203,21 +219,24 @@ export function ApplicationForm() {
                   </FormItem>
                 )}
               />
+            </div>
+            
+            <div className="grid grid-cols-2 gap-4">
               <FormField
                 control={form.control}
                 name="preference1"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Preference 1</FormLabel>
+                    <FormLabel className="text-white/80 text-sm">Preference 1</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select your first preference" />
+                        <SelectTrigger className="bg-white/5 border-white/10 text-white focus:border-white/30">
+                          <SelectValue placeholder="First choice" />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent>
+                      <SelectContent className="bg-black/90 border-white/10">
                         {PREFERENCE_OPTIONS.map((option) => (
-                          <SelectItem key={option.value} value={option.value}>
+                          <SelectItem key={option.value} value={option.value} className="text-white hover:bg-white/10">
                             {option.label}
                           </SelectItem>
                         ))}
@@ -232,16 +251,16 @@ export function ApplicationForm() {
                 name="preference2"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Preference 2</FormLabel>
+                    <FormLabel className="text-white/80 text-sm">Preference 2</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select your second preference" />
+                        <SelectTrigger className="bg-white/5 border-white/10 text-white focus:border-white/30">
+                          <SelectValue placeholder="Second choice" />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent>
+                      <SelectContent className="bg-black/90 border-white/10">
                         {PREFERENCE_OPTIONS.map((option) => (
-                          <SelectItem key={option.value} value={option.value}>
+                          <SelectItem key={option.value} value={option.value} className="text-white hover:bg-white/10">
                             {option.label}
                           </SelectItem>
                         ))}
@@ -251,73 +270,83 @@ export function ApplicationForm() {
                   </FormItem>
                 )}
               />
-              <FormField
-                control={form.control}
-                name="aboutYourself"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Tell us about yourself</FormLabel>
-                    <FormControl>
-                      <Textarea
-                        placeholder="Tell us a little bit about yourself"
-                        className="resize-none"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="whyJoin"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Why do you want to join this council?</FormLabel>
-                    <FormControl>
-                      <Textarea
-                        placeholder="What motivates you to join DataZen?"
-                        className="resize-none"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="resumeLink"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Resume (Google Drive Link)</FormLabel>
-                    <FormControl>
-                      <Input type="url" placeholder="https://drive.google.com/..." {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
             </div>
+            
+            <FormField
+              control={form.control}
+              name="resumeLink"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-white/80 text-sm">Resume Link</FormLabel>
+                  <FormControl>
+                    <Input 
+                      type="url" 
+                      placeholder="Google Drive link" 
+                      className="bg-white/5 border-white/10 text-white placeholder:text-white/40 focus:border-white/30 focus:bg-white/10"
+                      {...field} 
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            
+            <FormField
+              control={form.control}
+              name="aboutYourself"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-white/80 text-sm">About Yourself</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder="Tell us about yourself"
+                      className="bg-white/5 border-white/10 text-white placeholder:text-white/40 focus:border-white/30 focus:bg-white/10 resize-none h-20"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            
+            <FormField
+              control={form.control}
+              name="whyJoin"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-white/80 text-sm">Why Join DataZen?</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder="What motivates you?"
+                      className="bg-white/5 border-white/10 text-white placeholder:text-white/40 focus:border-white/30 focus:bg-white/10 resize-none h-20"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-            <CardFooter className="flex justify-end p-0 pt-4 sm:pt-6">
-              <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
-                {form.formState.isSubmitting ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Submitting...
-                  </>
-                ) : (
-                  <>
-                    Submit Application
-                    <Send className="ml-2 h-4 w-4" />
-                  </>
-                )}
-              </Button>
-            </CardFooter>
+            <Button 
+              type="submit" 
+              className="w-full h-12 bg-white text-black hover:bg-white/90 font-semibold transition-all duration-200" 
+              disabled={form.formState.isSubmitting}
+            >
+              {form.formState.isSubmitting ? (
+                <>
+                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                  Submitting...
+                </>
+              ) : (
+                <>
+                  Submit Application
+                  <Send className="ml-2 h-4 w-4" />
+                </>
+              )}
+            </Button>
           </form>
         </Form>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }
